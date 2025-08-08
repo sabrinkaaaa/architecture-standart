@@ -1,0 +1,43 @@
+@startuml
+!define RECTANGLE component
+
+actor Клиент as Client
+
+rectangle "Сайт банка\n(PHP + React.js)" as Website {
+  component "Веб-приложение\nReact.js" as WebsiteFrontend
+  component "Бэкенд\nPHP, MS SQL" as WebsiteBackend
+}
+
+rectangle "Интернет-банк\n(.NET MVC + MS SQL)" as InternetBank {
+  component "Веб-приложение\nASP.NET MVC" as IBFrontend
+  component "Бизнес-логика\n.NET" as IBBusinessLogic
+  component "База данных\nMS SQL" as IBDatabase
+}
+
+rectangle "Система кол-центра\n(React.js + Java Spring Boot + PostgreSQL)" as CallCenter {
+  component "Веб-интерфейс оператора\nReact.js" as CCFrontend
+  component "Бэкенд\nJava Spring Boot" as CCBackend
+  component "База данных\nPostgreSQL" as CCDatabase
+}
+
+rectangle "Автоматизированная банковская система (АБС)\n(Delphi + Oracle)" as ABS {
+  component "Десктопный клиент\nDelphi" as ABSClient
+  component "Бизнес-логика и данные\nPL-SQL + Oracle" as ABSDatabase
+}
+
+rectangle "СМС-шлюз оператора\n(Внешняя система)" as SMSGateway
+
+Client --> WebsiteFrontend : Просмотр депозитов\nПодача заявки (ФИО, тел.)
+WebsiteFrontend --> WebsiteBackend : Запрос/передача заявки (HTTPS)
+WebsiteBackend --> CCBackend : Передача заявки (шифр., REST/Очередь)
+Client --> IBFrontend : Просмотр депозитов\nПодача заявки
+IBFrontend --> IBBusinessLogic : Обработка заявки
+IBBusinessLogic --> IBDatabase : Работа с данными депозитов
+IBBusinessLogic --> SMSGateway : Отправка СМС-кода
+IBBusinessLogic --> CCBackend : Отправка заявки для обработки
+CCBackend --> CCDatabase : Сохранение заявки
+CCBackend --> ABSDatabase : Подтверждение условий и открытие депозита
+ABSDatabase --> SMSGateway : Отправка уведомлений клиенту
+ABSClient --> ABSDatabase : Обработка данных и управление депозитами
+
+@enduml

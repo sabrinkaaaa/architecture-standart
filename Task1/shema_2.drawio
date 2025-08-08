@@ -1,0 +1,96 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" modified="2025-08-08T06:39:14.972Z" version="24.2.5" etag="_5dLMnmEVmIb-3W5wYLr" type="device">
+  <diagram name="Page-1" id="2z30jiR-cCHag6_CDXY0">
+    <mxGraphModel dx="2002" dy="2321" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Client" value="Клиент" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="450" y="-960" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="InternetBank" value="Интернет-банк" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9f0ff;" vertex="1" parent="1">
+          <mxGeometry x="680" y="-770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Website" value="Сайт" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ff;" vertex="1" parent="1">
+          <mxGeometry x="370" y="-770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BankBranch" value="Отделение банка" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ff;" vertex="1" parent="1">
+          <mxGeometry x="520" y="-770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CallCenter" value="Колл-центр" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cbe0ff;" vertex="1" parent="1">
+          <mxGeometry x="220" y="-770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PartnerCallCenter" value="Партнерский колл-центр" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cbe0ff;" vertex="1" parent="1">
+          <mxGeometry x="80" y="-770" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ABS" value="АБС" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffd6d6;" vertex="1" parent="1">
+          <mxGeometry x="440" y="-630" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SMSGateway" value="СМС-шлюз" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d6eaff;" vertex="1" parent="1">
+          <mxGeometry x="440" y="-510" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TelecomOperator" value="Телеком оператор" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d6eaff;" vertex="1" parent="1">
+          <mxGeometry x="440" y="-400" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CallOperator" value="Оператор колл центра" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="-650" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FrontOfficeStaff" value="Сотрудник фронт офиса" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="700" y="-630" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BackOfficeStaff" value="Сотрудник бэк офиса" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="700" y="-510" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_Client_to_InternetBank" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="Client" target="InternetBank">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_Client_to_Website" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="Client" target="Website">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_Client_to_BankBranch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="Client" target="BankBranch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_Client_to_CallCenter" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="Client" target="CallCenter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_CallCenter_to_PartnerCallCenter" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="CallCenter" target="PartnerCallCenter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_InternetBank_to_ABS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="InternetBank" target="ABS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="745" y="-670" />
+              <mxPoint x="505" y="-670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_Website_to_ABS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="Website" target="ABS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_BankBranch_to_ABS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="BankBranch" target="ABS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_CallOperator_to_CallCenter" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="CallOperator" target="CallCenter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_ABS_to_SMSGateway" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="ABS" target="SMSGateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_SMSGateway_to_TelecomOperator" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="SMSGateway" target="TelecomOperator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_FrontOffice_to_ABS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="FrontOfficeStaff" target="ABS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_BackOffice_to_ABS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" edge="1" parent="1" source="BackOfficeStaff" target="ABS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="715" y="-520" />
+              <mxPoint x="610" y="-520" />
+              <mxPoint x="610" y="-600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
