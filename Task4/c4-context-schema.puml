@@ -3,19 +3,41 @@
 
 actor Клиент_Сайт as ClientSite
 actor Клиент_ИнтернетБанк as ClientInternetBank
+actor Оператор_КолЦентра as OperatorCC
+actor Оператор_ПартнёрскогоКолЦентра as OperatorPartnerCC
+
 rectangle "Сайт банка\n(PHP + React.js)" as Website
 rectangle "Интернет-банк\n(.NET MVC + MS SQL)" as InternetBank
-rectangle "Система кол-центра\n(React.js + Java Spring Boot)" as CallCenter
+rectangle "Система кол-центра банка\n(React.js + Java Spring Boot)" as CallCenter
+rectangle "Система партнёрского кол-центра\n(Внешняя система)" as PartnerCallCenter
 rectangle "Автоматизированная банковская система (АБС)\n(Delphi + Oracle)" as ABS
 rectangle "СМС-шлюз оператора\n(Внешняя система)" as SMSGateway
+rectangle "Хранилище ставок депозитов\n(централизованное)" as RatesStorage
+rectangle "Файловый обмен ставками\n(CSV/XLS)" as RatesFileExchange
 
+' Взаимодействие клиентов
 ClientSite --> Website : Просмотр депозитов\nПодача заявки (ФИО, тел.)
-Website --> CallCenter : Передача заявки (шифр.)
-CallCenter --> ABS : Обработка заявки\nПодтверждение условий
 ClientInternetBank --> InternetBank : Просмотр депозитов\nПодача заявки\nПодтверждение СМС
-InternetBank --> SMSGateway : Отправка СМС-кода
+
+' Ставки
+ABS --> RatesStorage : Экспорт актуальных ставок
+RatesStorage --> Website : Загрузка актуальных ставок
+RatesStorage --> InternetBank : Загрузка актуальных ставок
+RatesStorage --> CallCenter : Доступ к ставкам
+RatesStorage --> RatesFileExchange : Экспорт в файл для партнёрского кол-центра
+RatesFileExchange --> PartnerCallCenter : Передача файла со ставками
+
+' Работа кол-центров
+OperatorCC --> CallCenter : Консультация клиентов по ставкам
+OperatorPartnerCC --> PartnerCallCenter : Консультация клиентов по ставкам
+
+' Передача заявок
+Website --> CallCenter : Передача заявки (шифр.)
 InternetBank ..> CallCenter : Отправка заявки (через очередь)
-CallCenter --> ABS : Подтверждение заявки
+CallCenter --> ABS : Обработка/подтверждение заявки
+
+' СМС
+InternetBank --> SMSGateway : Отправка СМС-кода
 ABS --> SMSGateway : Отправка уведомления клиенту
 
 @enduml

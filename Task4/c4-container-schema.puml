@@ -2,6 +2,8 @@
 !define RECTANGLE component
 
 actor Клиент as Client
+actor ОператорКолЦентра as OperatorCC
+actor ОператорПартнёрскогоКолЦентра as OperatorPartnerCC
 
 rectangle "Сайт банка\n(PHP + React.js)" as Website {
   component "Веб-приложение\nReact.js" as WebsiteFrontend
@@ -14,10 +16,15 @@ rectangle "Интернет-банк\n(.NET MVC + MS SQL)" as InternetBank {
   component "База данных\nMS SQL" as IBDatabase
 }
 
-rectangle "Система кол-центра\n(React.js + Java Spring Boot + PostgreSQL)" as CallCenter {
+rectangle "Система кол-центра банка\n(React.js + Java Spring Boot + PostgreSQL)" as CallCenter {
   component "Веб-интерфейс оператора\nReact.js" as CCFrontend
   component "Бэкенд\nJava Spring Boot" as CCBackend
   component "База данных\nPostgreSQL" as CCDatabase
+}
+
+rectangle "Система партнёрского кол-центра\n(Внешняя система)" as PartnerCallCenter {
+  component "Веб-интерфейс оператора\nВнешний" as PartnerCCFrontend
+  component "Сервер обработки ставок\nВнешний" as PartnerCCServer
 }
 
 rectangle "Автоматизированная банковская система (АБС)\n(Delphi + Oracle)" as ABS {
@@ -27,17 +34,41 @@ rectangle "Автоматизированная банковская систе�
 
 rectangle "СМС-шлюз оператора\n(Внешняя система)" as SMSGateway
 
+rectangle "Хранилище ставок депозитов" as RatesStorage {
+  component "База ставок\nMS SQL/Oracle" as RatesDB
+}
+
+rectangle "Файловый обмен ставками\n(CSV/XLS)" as RatesFileExchange
+
+' Клиенты
 Client --> WebsiteFrontend : Просмотр депозитов\nПодача заявки (ФИО, тел.)
 WebsiteFrontend --> WebsiteBackend : Запрос/передача заявки (HTTPS)
-WebsiteBackend --> CCBackend : Передача заявки (шифр., REST/Очередь)
 Client --> IBFrontend : Просмотр депозитов\nПодача заявки
+
+' Сайт -> Кол-центр
+WebsiteBackend --> CCBackend : Передача заявки (шифр., REST/Очередь)
 IBFrontend --> IBBusinessLogic : Обработка заявки
-IBBusinessLogic --> IBDatabase : Работа с данными депозитов
-IBBusinessLogic --> SMSGateway : Отправка СМС-кода
 IBBusinessLogic --> CCBackend : Отправка заявки для обработки
+
+' СМС
+IBBusinessLogic --> SMSGateway : Отправка СМС-кода
+ABSDatabase --> SMSGateway : Отправка уведомлений клиенту
+
+' Кол-центр банка
+CCFrontend --> CCBackend : Действия оператора
 CCBackend --> CCDatabase : Сохранение заявки
 CCBackend --> ABSDatabase : Подтверждение условий и открытие депозита
-ABSDatabase --> SMSGateway : Отправка уведомлений клиенту
-ABSClient --> ABSDatabase : Обработка данных и управление депозитами
+
+' Операторы
+OperatorCC --> CCFrontend : Консультация по ставкам
+OperatorPartnerCC --> PartnerCCFrontend : Консультация по ставкам
+
+' Ставки
+ABSDatabase --> RatesDB : Экспорт актуальных ставок
+RatesDB --> WebsiteBackend : Загрузка ставок
+RatesDB --> IBBusinessLogic : Загрузка ставок
+RatesDB --> CCBackend : Доступ к ставкам
+RatesDB --> RatesFileExchange : Экспорт ставок в файл
+RatesFileExchange --> PartnerCCServer : Передача файла
 
 @enduml
