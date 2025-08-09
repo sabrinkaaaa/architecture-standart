@@ -17,12 +17,4 @@
 
 ## Решение
 
-- [Форма ADR](./ADR.md)
-- [Диаграмма контекста в модели С4](./c4-context-schema.puml)
-- [Диаграмма контейнеров в модели С4](./c4-container-schema.puml)
-- [Смотри список задач для каждой системы для будущего планирования](./ADR.md)
-- [RoadMap на горизонте 6 месяцев](./RoadMap_bank_Standart.drawio)
 
-![Диаграмма контекста в модели C4](./c4-context-schema.png)
-![Диаграмма контейнеров в модели C4](./c4-container-schema.png)
-![RoadMap на горизонте 6 месяцев](./Roadmap.png)
